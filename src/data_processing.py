@@ -7,31 +7,12 @@ class CleanData:
     def __init__(self,dataSet):
         self.dataSet = dataSet
 
-    def removeUnwanted(self):
-             self.dataSet.drop([
-             'date',
-            'bedrooms',
-            'sqft_living',
-            'floors',
-            'view',
-            'condition',
-            'city',
-            'street',
-            'country',
-             'statezip',
-            'yr_built',
-             'bathrooms',
-             'yr_renovated',
-             'sqft_basement',
-             'sqft_above',
-             'waterfront'
-             ],axis=1)
-            
+
     def saveToNewFile(self):
-          self.dataSet.to_csv('data/cleaned_house_data.csv')
+          self.dataSet.to_excel('data/cleaned_house_data.xlsx')
 
     def returnDataset(self):
-          newDataSet = pd.read_csv('data/cleaned_house_data.csv')
+          newDataSet = pd.read_excel('data/cleaned_house_data.xlsx')
           return newDataSet
 
           

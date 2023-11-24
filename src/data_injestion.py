@@ -14,7 +14,6 @@ class DataIngestion:
 
     def formatData(self,xlabel,ylabel,title):
         #plot the data on the graph
-
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
         plt.title(title)
