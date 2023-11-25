@@ -1,10 +1,11 @@
 import pandas as pd
-from src import data_injestion,data_processing
+from sklearn.linear_model import LinearRegression
+from src import data_injestion,data_processing,model
 
 class Main:
     def __init__(self):
         # read the dataset 
-        dataSet = pd.read_excel('house_price.xlsx')
+        dataSet = pd.read_excel('data/house_price.xlsx')
 
         #clean the dataset 
         processedData = data_processing.CleanData(dataSet)
@@ -17,6 +18,19 @@ class Main:
         x =newDataSet ['house_size'] 
         showData =  data_injestion.DataIngestion(x,y)
         showData.formatData('House size','house price','graph show the price of house and there size')
+
+        #run the model
+        reg = model.RegressionModel()
+        #fit the data 
+        reg.fitData(x,y)
+
+        #predicted price 
+        new_area = pd.read_excel('data/areas.xlsx')
+    
+        price = reg.predictPrice(new_area['house_size'])
+
+        reg.exportResults(newDataSet,price[0])
+        
         
 
 # call the main function         
