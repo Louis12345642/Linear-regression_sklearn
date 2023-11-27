@@ -1,11 +1,13 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from src import data_injestion,data_processing,model
+import numpy as np
 
 class Main:
     def __init__(self):
         # read the dataset 
         dataSet = pd.read_excel('data/house_price.xlsx')
+        areaDataSet = pd.read_excel('data/areas.xlsx')
 
         #clean the dataset 
         processedData = data_processing.CleanData(dataSet)
@@ -24,14 +26,13 @@ class Main:
         #fit the data 
         reg.fitData(x,y)
 
-        #predicted price 
-        new_area = pd.read_excel('data/areas.xlsx')
+        #predicted price
     
-        price = reg.predictPrice(new_area['house_size'])
+        price = reg.predictPrice(areaDataSet['house_size'])
+        areaDataSet['price'] = price
+        print(areaDataSet)
+        # areaDataSet.to_excel('data/predict_dataset.xlsx')
 
-        reg.exportResults(newDataSet,price[0])
-        
-        
 
 # call the main function         
 main = Main()
